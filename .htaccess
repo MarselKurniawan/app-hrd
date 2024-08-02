@@ -1,0 +1,19 @@
+<IfModule mod_rewrite.c>
+    RewriteEngine On
+    RewriteBase /app-hrd/
+
+    # Redirect requests to the appropriate PHP files
+    RewriteCond %{REQUEST_FILENAME} !-f
+    RewriteCond %{REQUEST_FILENAME} !-d
+    RewriteRule ^login/?$ views/login.php [L]
+    RewriteRule ^employee/?$ views/employee.php [L]
+    RewriteRule ^dashboard/?$ views/dashboard.php [L]
+    RewriteRule ^hrd/?$ views/hrd.php [L]
+    RewriteRule ^home/?$ views/home.php [L]
+
+    # Ensure that the URL ends with a trailing slash for directories
+    RewriteCond %{REQUEST_FILENAME} !-f
+    RewriteCond %{REQUEST_FILENAME} -d
+    RewriteCond %{REQUEST_URI} !(.*)/$
+    RewriteRule ^(.*)$ $1/ [L,R=301]
+</IfModule>
